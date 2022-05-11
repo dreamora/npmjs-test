@@ -1,3 +1,7 @@
+# 0.0.4
+
+- Github NpmJs publish action uses git tag instead of release to execute
+
 # 0.0.3
 
 - Fixes github publish action
