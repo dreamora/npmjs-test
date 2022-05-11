@@ -1,3 +1,7 @@
+# 0.0.6
+
+- Removes invalid npm references in github action config
+
 # 0.0.5
 
 - Github NpmJs publish action uses git tag instead of release to execute
