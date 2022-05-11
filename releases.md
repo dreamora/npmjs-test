@@ -1,3 +1,7 @@
+# 0.0.7
+
+- Makes npm publish public
+  
 # 0.0.6
 
 - Removes invalid npm references in github action config
