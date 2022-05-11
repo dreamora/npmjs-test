@@ -5,7 +5,7 @@
   "author": "Marc Schaerer",
   "license": "MIT",
   "scripts": {
-    "publish": "npm publish --access public",
+    "publish-npm": "npm publish --access public",
     "test": "echo \"no tests to run yet\""
   }
 }

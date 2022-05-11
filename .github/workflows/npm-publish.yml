@@ -33,6 +33,6 @@ jobs:
           registry-url: https://registry.npmjs.org/
           scope: '@dreamora'
       - run: yarn install --frozen-lockfile
-      - run: npm publish
+      - run: yarn publish-npm
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

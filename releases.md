@@ -1,3 +1,11 @@
+# 0.0.11
+
+- Use yarn publish instead of npm for consistency
+
+# 0.0.10
+
+- Address npmjs access limitation
+
 # 0.0.7
 
 - Makes npm publish public
