@@ -1,6 +1,10 @@
-# 0.0.4
+# 0.0.5
 
 - Github NpmJs publish action uses git tag instead of release to execute
+
+# 0.0.4
+
+- Github NpmJs publish action uses labels instead of release to execute
 
 # 0.0.3
 
