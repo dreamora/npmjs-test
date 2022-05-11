@@ -4,7 +4,10 @@
 name: Node.js Package
 
 on:
-  release:
+  # We do want to publish packages independent of github releases, simply by using the version tags.
+  # release:
+  #   types: [created]
+  label:
     types: [created]
 
 jobs:
