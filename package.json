@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Marc Schaerer",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "publish": "npm publish"
+  }
 }
