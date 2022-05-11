@@ -7,8 +7,9 @@ on:
   # We do want to publish packages independent of github releases, simply by using the version tags.
   # release:
   #   types: [created]
-  label:
-    types: [created]
+  push:
+    tags:
+      - v*
 
 jobs:
   build:
