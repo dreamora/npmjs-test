@@ -1,6 +1,6 @@
 {
   "name": "@dreamora/npmjs-test",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "main": "index.js",
   "author": "Marc Schaerer",
   "license": "MIT",
