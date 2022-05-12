@@ -35,12 +35,17 @@ jobs:
           release_name: Release ${{ steps.publish_tag.outputs.tag_name }}
           tag_name: ${{ steps.publish_tag.outputs.tag_name }}
           body_path: releases.md
-      - name: publish
+
+      - name: setup environment
         uses: actions/setup-node@v3
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
           scope: '@dreamora'
-        run: yarn install --frozen-lockfile && yarn publish-npm
+      - name: install
+        run: yarn install --frozen-lockfile
+        
+      - name: publish
+        run: yarn publish-npm
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
