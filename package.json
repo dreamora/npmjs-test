@@ -4,6 +4,10 @@
   "main": "index.js",
   "author": "Marc Schaerer",
   "license": "MIT",
+  "files": [
+      "README.md",
+      "releases.md"
+  ],
   "scripts": {
     "publish-npm": "npm publish --access public",
     "test": "echo \"no tests to run yet\""
