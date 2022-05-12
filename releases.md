@@ -1,3 +1,7 @@
+# 0.0.12
+
+- Add pipeline step to create github releases
+
 # 0.0.11
 
 - Use yarn publish instead of npm for consistency

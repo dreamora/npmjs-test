@@ -22,17 +22,25 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn test
 
-  publish-npm:
+  release:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: create release
+        uses: actions/create-release@v1
+        with:
+          release_name: Release ${{ steps.publish_tag.outputs.tag_name }}
+          tag_name: ${{ steps.publish_tag.outputs.tag_name }}
+          body_path: releases.md
+      - name: publish
+        uses: actions/setup-node@v3
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
           scope: '@dreamora'
-      - run: yarn install --frozen-lockfile
-      - run: yarn publish-npm
+        run: yarn install --frozen-lockfile && yarn publish-npm
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
