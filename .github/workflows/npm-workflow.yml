@@ -5,7 +5,8 @@ name: Publish NPM.js package on release
 
 on:
   release:
-    types: [created]
+    types:
+      - created
 
 jobs:
   publish:
@@ -18,9 +19,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          registry-url: 'https://registry.npmjs.org/'
-          scope: '@dreamora'
-      
+          registry-url: "https://registry.npmjs.org/"
+          scope: "@dreamora"
+
       - name: install
         run: yarn install --frozen-lockfile
 

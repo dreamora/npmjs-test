@@ -28,15 +28,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: create release
-        # While being maintained, action-gh-release does not trigger the release created event correctly?
-        # uses: softprops/action-gh-release@v1
-        # if: startsWith(github.ref, 'refs/tags/')
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        uses: actions/create-release@v1
-        with:
-          release_name: Release ${{ github.ref }}
-          tag_name: ${{ github.ref }}
-          body_path: releases.md
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
