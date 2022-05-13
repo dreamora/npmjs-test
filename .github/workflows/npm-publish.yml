@@ -34,7 +34,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          title: ${{ $env:GITHUB_REF }}
+          title: ${{ $GITHUB_REF }}
         # uses: actions/create-release@v1
         # with:
         #   release_name: Release ${{ github.ref }}
