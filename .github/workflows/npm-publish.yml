@@ -30,11 +30,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: create release
-        uses: elgohr/Github-Release-Action@v4
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          title: $GITHUB_REF 
         # uses: actions/create-release@v1
         # with:
         #   release_name: Release ${{ github.ref }}

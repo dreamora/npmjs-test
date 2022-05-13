@@ -1,3 +1,7 @@
+# 0.0.21
+
+- Updates github release action step with softprops/action-gh-release@v1
+
 # 0.0.17
 
 - Updates github release action step with elgohr/Github-Release-Action@v4
