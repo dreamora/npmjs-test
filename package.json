@@ -1,15 +1,22 @@
 {
   "name": "@dreamora/npmjs-test",
-  "version": "0.0.22",
+  "version": "0.0.24",
   "main": "index.js",
   "author": "Marc Schaerer",
   "license": "MIT",
   "files": [
     "README.md",
-    "releases.md"
+    "releases.md",
+    "lib"
   ],
   "scripts": {
     "publish-npm": "npm publish --access public",
+    "clean": "rimraf lib",
+    "build": "tsc",
     "test": "echo \"no tests to run yet\""
+  },
+  "devDependencies": {
+    "rimraf": "3.0.2",
+    "typescript": "4.6.4"
   }
 }
