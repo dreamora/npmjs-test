@@ -1,1 +1,1 @@
-- Added: Release note addition
+- Changed the default output

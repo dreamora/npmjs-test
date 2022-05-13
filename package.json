@@ -12,8 +12,10 @@
   "scripts": {
     "publish-npm": "npm publish --access public",
     "clean": "rimraf lib",
+    "lint": "echo \"lint is not set up yet\"",
     "build": "tsc",
-    "test": "echo \"no tests to run yet\""
+    "test": "echo \"no tests to run yet\"",
+    "test:e2e": "echo \"no end to end tests to run yet\""
   },
   "devDependencies": {
     "rimraf": "3.0.2",
