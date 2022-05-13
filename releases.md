@@ -1,3 +1,7 @@
+# 0.0.17
+
+- Updates github release action step with elgohr/Github-Release-Action@v4
+
 # 0.0.12
 
 - Add pipeline step to create github releases
