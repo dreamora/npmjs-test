@@ -17,16 +17,38 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - name: setup
+      - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: ${{ matrix.node_version }}
+          cache: "yarn"
+          cache-dependency-path: yarn.lock
 
-      - name: install
+      - name: Install YARN dependencies
+        if: steps.cache-npm.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
+
+      - name: Set up JDK for Maven Deployment 
+        uses: actions/setup-java@v3
+        with:
+          cache: maven
+          java-version: ${{ matrix.jdk_version }}
+          distribution: ${{ matrix.jdk_distribution }}
+          server-id: "ossrh" 
+          server-username: ${{ secrets.MAVEN_USERNAME }}
+          server-password: ${{ secrets.MAVEN_PASSWORD }}
+
+      - name: Install MAVEN dependencies
+        run: mvn -B process-resources
+
+      - name: lint
+        run: yarn lint
 
       - name: test
         run: yarn test
 
       - name: build
         run: yarn build
+
+      - name: E2E tests
+        run: yarn test:e2e

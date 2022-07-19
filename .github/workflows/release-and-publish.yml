@@ -12,18 +12,32 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v3
 
-      - name: Setup environment
+      - name: Set up Node for NPMJS Deployment
         uses: actions/setup-node@v3
         with:
-          node-version: 16
-          registry-url: https://registry.npmjs.org/
-          scope: '@dreamora'
+          node-version: "16" 
+          cache: "yarn"
+          cache-dependency-path: yarn.lock
 
-      - name: install
+      - name: Install YARN dependencies
+        if: steps.cache-npm.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
+
+      - name: Set up JDK for Maven Deployment 
+        uses: actions/setup-java@v3
+        with:
+          cache: maven
+          java-version: "8.0.332+9"
+          distribution: "temurin"
+          server-id: "ossrh" 
+          server-username: ${{ secrets.MAVEN_USERNAME }}
+          server-password: ${{ secrets.MAVEN_PASSWORD }}
+
+      - name: Install MAVEN dependencies
+        run: mvn -B process-resources
 
       - name: lint
         run: yarn lint
@@ -47,6 +61,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: publish
-        run: yarn publish-npm
+        run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

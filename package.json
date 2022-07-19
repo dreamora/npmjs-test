@@ -21,8 +21,7 @@
     "build": "lerna run --stream build",
     "test": "lerna run --stream test",
     "test:e2e": "lerna run --stream test:e2e",
-    "dist": "yarn clean && yarn test && yarn build && yarn test:e2e",
-    "install-deps": "lerna run --stream install-deps"
+    "dist": "yarn clean && yarn test && yarn build && yarn test:e2e"
   },
   "devDependencies": {
     "lerna": "^5.1.8"

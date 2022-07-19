@@ -8,12 +8,11 @@
         "README.md"
     ],
     "scripts": {
-        "publish": "mvn deploy",
+        "publish": "echo \"publish mock 'java'\"",
         "clean": "mvn clean",
         "build": "mvn install -DskipTests",
         "test": "mvn clean test",
-        "test:e2e": "echo \"no end to end tests to run yet\"",
-        "install-deps": "mvn dependency:resolve"
+        "test:e2e": "echo \"no end to end tests to run yet\""
     },
     "devDependencies": {
         "@dreamora/npmjs-typescript": "^0.0.36"
