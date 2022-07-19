@@ -1,0 +1,47 @@
+name: NPM install workflow with node module caching
+
+on:
+  workflow_call:
+    inputs:
+      cache_key:
+        required: true
+        type: string
+      node_version:
+        required: true
+        type: string
+jobs:
+  cached_npm_install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore cache
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-sources
+        with:
+          path: .
+          key: ${{ inputs.cache_key }} 
+          restore-keys: ${{ inputs.cache_key }}
+
+      - name: setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ inputs.node_version }}
+          cache: "npm"
+          cache-dependency-path: yarn.lock
+
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            node_modules
+            packages/typescript/node_modules
+          key: ${{ runner.os }}-modules-npm-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-modules-npm-
+
+      - name: install
+        if: steps.cache-npm.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile

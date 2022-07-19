@@ -14,13 +14,12 @@
     "registry": "https://registry.npmjs.org"
   },
   "scripts": {
-    "publish": "npm publish --access public",
+    "publish": "echo \"publish mock 'typescript'\"",
     "clean": "rimraf lib",
     "lint": "echo \"lint is not set up yet\"",
     "build": "tsc",
     "test": "echo \"no tests to run yet\"",
-    "test:e2e": "echo \"no end to end tests to run yet\"",
-    "install-deps": "yarn install --frozen-lockfile"
+    "test:e2e": "echo \"no end to end tests to run yet\""
   },
   "devDependencies": {
     "rimraf": "3.0.2",

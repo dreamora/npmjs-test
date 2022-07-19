@@ -1,11 +1,12 @@
 # This workflow will run the distribution steps using node when a pull request is created or updated
 # For more information see: https://docs.github.com/en/actions/using-workflows/about-workflows
 
-name: PR Continuous Integration 
+name: PR Continuous Integration
 
 on:
   pull_request:
     types: [opened, reopened, synchronize]
+    branches: [develop]
 
 jobs:
   dist:
@@ -14,16 +15,38 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - name: setup
+      - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
-      
-      - name: install
+          node-version: "16" 
+          cache: "yarn"
+          cache-dependency-path: yarn.lock
+
+      - name: Install YARN dependencies
+        if: steps.cache-npm.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
+
+      - name: Set up JDK for Maven Deployment 
+        uses: actions/setup-java@v3
+        with:
+          cache: maven
+          java-version: "8.0.332+9"
+          distribution: "temurin"
+          server-id: "ossrh" 
+          server-username: ${{ secrets.MAVEN_USERNAME }}
+          server-password: ${{ secrets.MAVEN_PASSWORD }}
+
+      - name: Install MAVEN dependencies
+        run: mvn -B process-resources
+
+      - name: lint
+        run: yarn lint
 
       - name: test
         run: yarn test
 
       - name: build
         run: yarn build
+
+      - name: E2E tests
+        run: yarn test:e2e

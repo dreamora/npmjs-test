@@ -1,0 +1,60 @@
+name: MVN install workflow with package caching
+
+on:
+  workflow_call:
+    inputs:
+      cache_key:
+        required: true
+        type: string
+      jdk_version:
+        required: true
+        type: string
+      jdk_distribution:
+        required: true
+        type: string
+      server_id:
+        required: true
+        type: string
+    secrets:
+      MAVEN_USERNAME:
+        required: true
+      MAVEN_PASSWORD:
+        required: true
+jobs:
+  cached_mvn_install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore cache
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-sources
+        with:
+          path: .
+          key: ${{ inputs.cache_key }}
+          restore-keys: ${{ inputs.cache_key }}
+
+      - name: Set up JDK  with Maven Deployment 
+        uses: actions/setup-java@v3
+        with:
+          cache: maven
+          java-version: ${{ inputs.jdk_version }}
+          distribution: ${{ inputs.jdk_distribution }}
+          server-id: ${{ inputs.server_id }}
+          server-username: ${{ secrets.MAVEN_USERNAME }}
+          server-password: ${{ secrets.MAVEN_PASSWORD }}
+
+      - name: Cache maven packages
+        id: cache-mvn
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-mvn-packages
+        with:
+          path: |
+            ~/.m2
+          key: packages-mvn-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            packages-mvn-
+
+      - name: Install maven dependencies
+        if: steps.cache-mvn.outputs.cache-hit != 'true'
+        run: mvn -B -U process-resources --file pom.xml
