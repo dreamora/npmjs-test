@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ch.dreamora</groupId>
     <artifactId>root</artifactId>
-    <version>0.0.36</version>
+    <version>0.0.37</version>
     <name>root</name>
     <description>Maven pipeline test package</description>
     <url>https://dreamora.ch</url>

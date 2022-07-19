@@ -11,13 +11,9 @@ on:
       - "main"
 
 jobs:
-  dist:
+  protect:
+    name: Protect stable against breaking changes
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        jdk_distribution: ["temurin"]
-        jdk_version: ["8.0.332+9"]
-        node_version: ["16"]
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -25,7 +21,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node_version }}
+          node-version: "16" 
           cache: "yarn"
           cache-dependency-path: yarn.lock
 
@@ -33,15 +29,12 @@ jobs:
         if: steps.cache-npm.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
-      - name: Set up JDK for Maven Deployment 
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           cache: maven
-          java-version: ${{ matrix.jdk_version }}
-          distribution: ${{ matrix.jdk_distribution }}
-          server-id: "ossrh" 
-          server-username: ${{ secrets.MAVEN_USERNAME }}
-          server-password: ${{ secrets.MAVEN_PASSWORD }}
+          java-version: "8.0.332+9"
+          distribution: "temurin"
 
       - name: Install MAVEN dependencies
         run: mvn -B process-resources

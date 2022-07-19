@@ -15,7 +15,7 @@
   },
   "private": true,
   "scripts": {
-    "publish": "lerna run --parallel --stream dist && lerna run publish",
+    "publish-pkg": "lerna run --stream publish-pkg",
     "clean": "lerna run --stream --parallel clean",
     "lint": "lerna run --parallel --stream lint",
     "build": "lerna run --stream build",
