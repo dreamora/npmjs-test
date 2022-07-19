@@ -1,6 +1,6 @@
 {
     "name": "@dreamora/npmjs-java",
-    "version": "0.0.36",
+    "version": "0.0.37",
     "main": "index.js",
     "author": "Marc Schaerer",
     "license": "MIT",
@@ -8,13 +8,13 @@
         "README.md"
     ],
     "scripts": {
-        "publish": "echo \"publish mock 'java'\"",
+        "publish-pkg": "echo \"publish mock 'java'\"",
         "clean": "mvn clean",
         "build": "mvn install -DskipTests",
         "test": "mvn clean test",
         "test:e2e": "echo \"no end to end tests to run yet\""
     },
     "devDependencies": {
-        "@dreamora/npmjs-typescript": "^0.0.36"
+        "@dreamora/npmjs-typescript": "^0.0.37"
     }
 }
