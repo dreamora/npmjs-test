@@ -1,0 +1,29 @@
+{
+  "name": "@dreamora/npmjs-typescript",
+  "version": "0.0.36",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "author": "Marc Schaerer",
+  "license": "MIT",
+  "files": [
+    "README.md",
+    "releases.md",
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "publish": "npm publish --access public",
+    "clean": "rimraf lib",
+    "lint": "echo \"lint is not set up yet\"",
+    "build": "tsc",
+    "test": "echo \"no tests to run yet\"",
+    "test:e2e": "echo \"no end to end tests to run yet\"",
+    "install-deps": "yarn install --frozen-lockfile"
+  },
+  "devDependencies": {
+    "rimraf": "3.0.2",
+    "typescript": "^4.7.4"
+  }
+}
