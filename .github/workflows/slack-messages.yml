@@ -65,7 +65,7 @@ jobs:
                     "text":
                       {
                         "type": "mrkdwn",
-                        "text": "<{{CUSTOM_AUTHOR_LINK}}|{{GITHUB_ACTOR}}> opened pull request _<{{CUSTOM_COMMIT_URL}}|{{CUSTOM_PR_TITLE}}>_",
+                        "text": "<{{CUSTOM_AUTHOR_LINK}}|{{GITHUB_ACTOR}}> reopened pull request _<{{CUSTOM_COMMIT_URL}}|{{CUSTOM_PR_TITLE}}>_",
                       },
                   },
                   {

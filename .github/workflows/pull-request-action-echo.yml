@@ -23,7 +23,7 @@ jobs:
           slack_json:
            '{
               "username": "{{GITHUB_ACTOR}}",
-              "text": "{{GITHUB_ACTOR}} opened pull request {{CUSTOM_COMMIT_MSG}} on repository {{GITHUB_REF}}",
+              "text": "{{GITHUB_ACTOR}} synchronized pull request {{CUSTOM_COMMIT_MSG}} on repository {{GITHUB_REF}}",
               "icon_url": "{{CUSTOM_AUTHOR_PICTURE}}",
               "blocks":
                 [
