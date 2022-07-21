@@ -56,7 +56,7 @@ jobs:
           slack_json:
            '{
               "username": "{{GITHUB_ACTOR}}",
-              "text": "<{{CUSTOM_AUTHOR_LINK}}|{{GITHUB_ACTOR}}> reopened pull request {{CUSTOM_COMMIT_MESSAGE}} on repository {{GITHUB_REF}}",
+              "text": "<{{CUSTOM_AUTHOR_LINK}}|{{GITHUB_ACTOR}}> reopened  pull request {{CUSTOM_COMMIT_MESSAGE}} on repository {{GITHUB_REF}}",
               "icon_url": "{{CUSTOM_AUTHOR_PICTURE}}",
               "blocks":
                 [
