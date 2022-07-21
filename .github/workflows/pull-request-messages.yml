@@ -1,0 +1,147 @@
+# This workflow will run the distribution steps using node when a pull request is created or updated
+# For more information see: https://docs.github.com/en/actions/using-workflows/about-workflows
+
+name: PR Slack Communication
+
+on:
+  pull_request:
+    types: [opened, reopened, closed]
+    branches: [develop]
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    steps:
+      - name: PR opened
+        if: github.event.pull_request.action == 'opened'
+        uses: tiloio/slack-webhook-action@v1.0.
+        with:
+          slack_web_hook_url: ${{ secrets.SLACK_WEBHOOK_CHANNEL_URL }}
+          slack_json:
+           '{
+              "username": "{{GITHUB_ACTOR}}",
+              "text": "{{GITHUB_ACTOR}} opened pull request {{ CUSTOM_COMMIT_MESSAGE }} on repository {{ GITHUB_REF }}",
+              "icon_url": "{{CUSTOM_AUTHOR_PICTURE}}",
+              "blocks":
+                [
+                  {
+                    "type": "section",
+                    "text":
+                      {
+                        "type": "mrkdwn",
+                        "text": "{{GITHUB_ACTOR}} opened pull request _{{CUSTOM_COMMIT_MSG}}_",
+                      },
+                  },
+                  {
+                    "type": "context",
+                    "elements":
+                      [
+                        {
+                          "type": "mrkdwn",
+                          "text": ":speech_balloon: commit <{{CUSTOM_COMMIT_URL}}|{{CUSTOM_SHORT_GITHUB_SHA}}>",
+                        },
+                      ],
+                  },
+                ],
+            }'
+
+      - name: PR opened
+        if: github.event.pull_request.action == 'reopened'
+        uses: tiloio/slack-webhook-action@v1.0.
+        with:
+          slack_web_hook_url: ${{ secrets.SLACK_WEBHOOK_CHANNEL_URL }}
+          slack_json:
+           '{
+              "username": "{{GITHUB_ACTOR}}",
+              "text": "{{GITHUB_ACTOR}} reopened pull request {{ CUSTOM_COMMIT_MESSAGE }} on repository {{ GITHUB_REF }}",
+              "icon_url": "{{CUSTOM_AUTHOR_PICTURE}}",
+              "blocks":
+                [
+                  {
+                    "type": "section",
+                    "text":
+                      {
+                        "type": "mrkdwn",
+                        "text": "{{GITHUB_ACTOR}} opened pull request _{{CUSTOM_COMMIT_MSG}}_",
+                      },
+                  },
+                  {
+                    "type": "context",
+                    "elements":
+                      [
+                        {
+                          "type": "mrkdwn",
+                          "text": ":speech_balloon: commit <{{CUSTOM_COMMIT_URL}}|{{CUSTOM_SHORT_GITHUB_SHA}}>",
+                        },
+                      ],
+                  },
+                ],
+            }'
+
+
+      - name: PR closed
+        if: github.event.pull_request.action == 'closed' || github.event.pull_request.merged != true
+        uses: tiloio/slack-webhook-action@v1.0.
+        with:
+          slack_web_hook_url: ${{ secrets.SLACK_WEBHOOK_CHANNEL_URL }}
+          slack_json:
+           '{
+              "username": "{{GITHUB_ACTOR}}",
+              "text": "{{GITHUB_ACTOR}} closed pull request {{ CUSTOM_COMMIT_MESSAGE }} on repository {{ GITHUB_REF }}",
+              "icon_url": "{{CUSTOM_AUTHOR_PICTURE}}",
+              "blocks":
+                [
+                  {
+                    "type": "section",
+                    "text":
+                      {
+                        "type": "mrkdwn",
+                        "text": "{{GITHUB_ACTOR}} closed pull request _{{CUSTOM_COMMIT_MESSAGE}}_",
+                      },
+                  },
+                  {
+                    "type": "context",
+                    "elements":
+                      [
+                        {
+                          "type": "mrkdwn",
+                          "text": ":speech_balloon: commit <{{CUSTOM_COMMIT_URL}}|{{CUSTOM_SHORT_GITHUB_SHA}}>",
+                        },
+                      ],
+                  },
+                ],
+            }'
+
+
+      - name: PR merged
+        if: github.event.pull_request.action == 'closed' || github.event.pull_request.merged == true
+        uses: tiloio/slack-webhook-action@v1.0.
+        with:
+          slack_web_hook_url: ${{ secrets.SLACK_WEBHOOK_CHANNEL_URL }}
+          slack_json:
+           '{
+              "username": "{{GITHUB_ACTOR}}",
+              "text": "Pull request {{ CUSTOM_COMMIT_MESSAGE }} merged {{ GITHUB_REF }}",
+              "icon_url": "{{CUSTOM_AUTHOR_PICTURE}}",
+              "blocks":
+                [
+                  {
+                    "type": "section",
+                    "text":
+                      {
+                        "type": "mrkdwn",
+                        "text": "Pull request _{{CUSTOM_COMMIT_MESSAGE}}_ was merged",
+                      },
+                  },
+                  {
+                    "type": "context",
+                    "elements":
+                      [
+                        {
+                          "type": "mrkdwn",
+                          "text": ":speech_balloon: commit <{{CUSTOM_COMMIT_URL}}|{{CUSTOM_SHORT_GITHUB_SHA}}>",
+                        },
+                      ],
+                  },
+                ],
+            }'
