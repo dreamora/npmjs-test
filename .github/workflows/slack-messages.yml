@@ -17,13 +17,13 @@ jobs:
     steps:
       - name: PR opened
         if: github.event.action == 'opened'
-        uses: tiloio/slack-webhook-action@v1.1.2
+        uses: dreamora/slack-webhook-action@v1.0.3
         with:
           slack_web_hook_url: ${{ secrets.SLACK_WEBHOOK_CHANNEL_URL }}
           slack_json:
            '{
               "username": "{{GITHUB_ACTOR}}",
-              "text": "{{GITHUB_ACTOR}} opened pull request {{CUSTOM_COMMIT_MESSAGE}} on repository {{GITHUB_REF}}",
+              "text": "<{{CUSTOM_AUTHOR_LINK}}|{{GITHUB_ACTOR}}> opened pull request {{CUSTOM_COMMIT_MESSAGE}} on repository {{GITHUB_REF}}",
               "icon_url": "{{CUSTOM_AUTHOR_PICTURE}}",
               "blocks":
                 [
@@ -32,7 +32,7 @@ jobs:
                     "text":
                       {
                         "type": "mrkdwn",
-                        "text": "{{GITHUB_ACTOR}} opened pull request _{{github.event.pull_request.title}}_",
+                        "text": "<{{CUSTOM_AUTHOR_LINK}}|{{GITHUB_ACTOR}}> opened pull request _<{{CUSTOM_COMMIT_URL}}|{{CUSTOM_PR_TITLE}}>_",
                       },
                   },
                   {
@@ -50,13 +50,13 @@ jobs:
 
       - name: PR opened
         if: github.event.action == 'reopened'
-        uses: tiloio/slack-webhook-action@v1.1.2
+        uses: dreamora/slack-webhook-action@v1.0.3
         with:
           slack_web_hook_url: ${{ secrets.SLACK_WEBHOOK_CHANNEL_URL }}
           slack_json:
            '{
               "username": "{{GITHUB_ACTOR}}",
-              "text": "{{GITHUB_ACTOR}} reopened pull request {{CUSTOM_COMMIT_MESSAGE}} on repository {{GITHUB_REF}}",
+              "text": "<{{CUSTOM_AUTHOR_LINK}}|{{GITHUB_ACTOR}}> reopened pull request {{CUSTOM_COMMIT_MESSAGE}} on repository {{GITHUB_REF}}",
               "icon_url": "{{CUSTOM_AUTHOR_PICTURE}}",
               "blocks":
                 [
@@ -65,7 +65,7 @@ jobs:
                     "text":
                       {
                         "type": "mrkdwn",
-                        "text": "{{GITHUB_ACTOR}} opened pull request _{{github.event.pull_request.title}}_",
+                        "text": "<{{CUSTOM_AUTHOR_LINK}}|{{GITHUB_ACTOR}}> opened pull request _<{{CUSTOM_COMMIT_URL}}|{{CUSTOM_PR_TITLE}}>_",
                       },
                   },
                   {
@@ -84,13 +84,13 @@ jobs:
 
       - name: PR closed
         if: github.event.action == 'closed' && github.event.pull_request.merged != true
-        uses: tiloio/slack-webhook-action@v1.1.2
+        uses: dreamora/slack-webhook-action@v1.0.3
         with:
           slack_web_hook_url: ${{ secrets.SLACK_WEBHOOK_CHANNEL_URL }}
           slack_json:
            '{
               "username": "{{GITHUB_ACTOR}}",
-              "text": "{{GITHUB_ACTOR}} closed pull request {{CUSTOM_COMMIT_MESSAGE}} on repository {{GITHUB_REF}}",
+              "text": "<{{CUSTOM_AUTHOR_LINK}}|{{GITHUB_ACTOR}}> closed pull request {{CUSTOM_COMMIT_MESSAGE}} on repository {{GITHUB_REF}}",
               "icon_url": "{{CUSTOM_AUTHOR_PICTURE}}",
               "blocks":
                 [
@@ -99,7 +99,7 @@ jobs:
                     "text":
                       {
                         "type": "mrkdwn",
-                        "text": "{{GITHUB_ACTOR}} closed pull request _{{github.event.pull_request.title}}_",
+                        "text": "<{{CUSTOM_AUTHOR_LINK}}|{{GITHUB_ACTOR}}> closed pull request _<{{CUSTOM_COMMIT_URL}}|{{CUSTOM_PR_TITLE}}>_",
                       },
                   },
                   {
@@ -118,13 +118,13 @@ jobs:
 
       - name: PR merged 
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
-        uses: tiloio/slack-webhook-action@v1.1.2
+        uses: dreamora/slack-webhook-action@v1.0.3
         with:
           slack_web_hook_url: ${{ secrets.SLACK_WEBHOOK_CHANNEL_URL }}
           slack_json:
            '{
               "username": "{{GITHUB_ACTOR}}",
-              "text": "{{GITHUB_ACTOR}} merged pull request {{CUSTOM_COMMIT_MESSAGE}}",
+              "text": "<{{CUSTOM_AUTHOR_LINK}}|{{GITHUB_ACTOR}}> merged pull request {{CUSTOM_COMMIT_MESSAGE}}",
               "icon_url": "{{CUSTOM_AUTHOR_PICTURE}}",
               "blocks":
                 [
@@ -133,7 +133,7 @@ jobs:
                     "text":
                       {
                         "type": "mrkdwn",
-                        "text": "{{GITHUB_ACTOR}} merged pull request _{{github.event.pull_request.title}}_",
+                        "text": "<{{CUSTOM_AUTHOR_LINK}}|{{GITHUB_ACTOR}}> merged pull request _<{{CUSTOM_COMMIT_URL}}|{{CUSTOM_PR_TITLE}}>_",
                       },
                   },
                   {
@@ -151,7 +151,7 @@ jobs:
 
       - name: PR approved 
         if: github.event.action == 'submitted'
-        uses: tiloio/slack-webhook-action@v1.1.2
+        uses: dreamora/slack-webhook-action@v1.0.3
         with:
           slack_web_hook_url: ${{ secrets.SLACK_WEBHOOK_CHANNEL_URL }}
           slack_json:
@@ -166,7 +166,7 @@ jobs:
                     "text":
                       {
                         "type": "mrkdwn",
-                        "text": "Pull request _{{github.event.pull_request.title}}_ was approved",
+                        "text": "Pull request _<{{CUSTOM_COMMIT_URL}}|{{CUSTOM_PR_TITLE}}>_ was approved",
                       },
                   },
                   {
@@ -183,7 +183,7 @@ jobs:
             }'
       - name: PR dismissed 
         if: github.event.action == 'dismissed'
-        uses: tiloio/slack-webhook-action@v1.1.2
+        uses: dreamora/slack-webhook-action@v1.0.3
         with:
           slack_web_hook_url: ${{ secrets.SLACK_WEBHOOK_CHANNEL_URL }}
           slack_json:
@@ -198,7 +198,7 @@ jobs:
                     "text":
                       {
                         "type": "mrkdwn",
-                        "text": "Pull request _{{github.event.pull_request.title}}_ was approved",
+                        "text": "Pull request _<{{CUSTOM_COMMIT_URL}}|{{CUSTOM_PR_TITLE}}>_ was approved",
                       },
                   },
                   {
