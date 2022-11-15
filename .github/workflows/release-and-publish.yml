@@ -56,7 +56,7 @@ jobs:
         id: extract-release-notes
         uses: ffurrer2/extract-release-notes@v1
         with:
-          changelog_file: Release-Notes.md
+          changelog_file: release-notes.md
 
       - name: create release
         uses: softprops/action-gh-release@v1
