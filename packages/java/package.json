@@ -1,6 +1,6 @@
 {
     "name": "@dreamora/npmjs-java",
-    "version": "0.0.38",
+    "version": "0.0.39",
     "main": "index.js",
     "author": "Marc Schaerer",
     "license": "MIT",
@@ -15,6 +15,6 @@
         "test:e2e": "echo \"no end to end tests to run yet\""
     },
     "devDependencies": {
-        "@dreamora/npmjs-typescript": "^0.0.38"
+        "@dreamora/npmjs-typescript": "^0.0.39"
     }
 }
