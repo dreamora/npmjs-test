@@ -2,19 +2,15 @@
   "categories": [
     {
       "title": "## 🚀 Features",
-      "labels": ["feature", "f", "F", "F**", "F!!"]
+      "labels": ["feature", "enhancement"]
     },
     {
       "title": "## 🐛 Fixes",
-      "labels": ["fix", "b", "B**", "B!!"]
+      "labels": ["fix", "bug"]
     },
     {
-      "title": "## Changes",
-      "labels": ["r", "R**", "R!!"]
-    },
-    {
-      "title": "## Environment",
-      "labels": ["E", "e"]
+      "title": "## Documentation",
+      "labels": ["documentation"]
     },
     {
       "title": "## 🧪 Tests",
@@ -53,7 +49,7 @@
     }
   ],
   "trim_values": false,
-  "max_tags_to_fetch": 3,
+  "max_tags_to_fetch": 200,
   "max_pull_requests": 200,
   "max_back_track_time_days": 365,
   "tag_resolver": {
