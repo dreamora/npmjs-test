@@ -58,6 +58,7 @@ jobs:
         with:
           changelog_file: release-notes.md
 
+      # very powerful and gives more control over release logs as it is per PR. Problem is it requires labeled PRs for categorisation
       # - name: "Build Changelog"
       #   id: build_changelog
       #   uses: mikepenz/release-changelog-builder-action@v3.5.0
@@ -76,23 +77,35 @@ jobs:
       #     # The workflow permissions of the project must be updated to 'Workflows have read and write permissions in the repository for all scopes'
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Changelog
-        uses: scottbrenner/generate-changelog-action@master
-        id: Changelog
+      # seems a bit limited, but otherwise it could be good?
+      # - name: Changelog
+      #   uses: scottbrenner/generate-changelog-action@master
+      #   id: Changelog
+
+      - name: Conventional Changelog Action
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          github-token: ${{ secrets.github_token }}
+          output-file: "false"
 
       - name: Create Release
         id: create_release
         uses: actions/create-release@latest
-        if: startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/') && ${{ steps.changelog.outputs.skipped == 'false' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            ${{ steps.Changelog.outputs.changelog }}
-          draft: false
-          prerelease: false
+          # scottbrenner
+          # tag_name: ${{ github.ref }}
+          # release_name: Release ${{ github.ref }}
+          # body: |
+          #   ${{ steps.Changelog.outputs.changelog }}
+          # draft: false
+          # prerelease: false
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          release_name: ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}
 
       - name: publish
         run: yarn publish-pkg
