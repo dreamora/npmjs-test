@@ -90,6 +90,7 @@ jobs:
           output-file: "false"
           skip-tag: true
           skip-commit: true
+          git-push: false
 
       - name: Create Release
         id: create_release
