@@ -52,11 +52,11 @@ jobs:
       - name: E2E tests
         run: yarn test:e2e
 
-      - name: Extract release notes
-        id: extract-release-notes
-        uses: ffurrer2/extract-release-notes@v1
-        with:
-          changelog_file: release-notes.md
+      # - name: Extract release notes
+      #   id: extract-release-notes
+      #   uses: ffurrer2/extract-release-notes@v1
+      #   with:
+      #     changelog_file: release-notes.md
 
       # very powerful and gives more control over release logs as it is per PR. Problem is it requires labeled PRs for categorisation
       # - name: "Build Changelog"
@@ -84,7 +84,7 @@ jobs:
 
       - name: Conventional Changelog Action
         id: changelog
-        uses: TriPSs/conventional-changelog-action@v3
+        uses: TriPSs/conventional-changelog-action@latest
         with:
           github-token: ${{ secrets.github_token }}
           output-file: "false"
